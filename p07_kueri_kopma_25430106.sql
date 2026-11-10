@@ -90,3 +90,30 @@ WHERE id_penjualan = 2;
 -- harga_satuan_detail_penjualan = harga satuan barang.
 -- AS subtotal = memberi nama hasil perkalian.
 -- Catatan: Angka 2 merupakan id_penjualan yang sesuai dengan nota PJ-2609-0142. 
+
+-- /////////////////////////////////////////////////////
+-- E.1: Menampilkan nama barang kapital dan harga Rupiah
+SELECT
+    UPPER(nama_barang) AS nama_barang,
+    CONCAT('Rp', FORMAT(harga_jual_barang, 0, 'id_ID')) AS harga
+FROM barang;
+
+-- UPPER() mengubah nama barang menjadi huruf kapital.
+-- FORMAT() memberi pemisah ribuan.
+-- CONCAT() menggabungkan teks Rp dengan harga.
+
+-- E.2: Kueri salah secara semantik
+SELECT *
+FROM barang
+WHERE kategori_barang = 'ATK'
+  AND harga_jual_barang > 5000
+   OR kategori_barang = 'Makanan';
+
+-- E.2: Perbaikan kueri dengan tanda kurung
+SELECT *
+FROM barang
+WHERE kategori_barang = 'ATK'
+  AND (
+      harga_jual_barang > 5000
+      OR kategori_barang = 'Makanan'
+  );
